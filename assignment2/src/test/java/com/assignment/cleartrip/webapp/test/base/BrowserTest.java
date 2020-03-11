@@ -19,8 +19,12 @@ public class BrowserTest {
 	@BeforeSuite(alwaysRun=true)
 	public void launch_webdriver()
 	{
-		
-		System.setProperty("browser", "firefox");
+		/**
+		 * 
+		 * Set the browser name either firefox or chrome
+		 * now by default it's chrome 
+		 */
+		System.setProperty("browser", "chrome");
 		String browser_name=System.getProperty("browser");
 		
 		switch (browser_name) {

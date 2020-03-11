@@ -13,11 +13,10 @@ import com.assignment.cleartrip.webapp.test.home.HomePage;
 @Test
 public class FlightSearchTest extends BrowserTest {
 	
-	private HomePage home;
+	HomePage home;
 	SearchedFlightPage flightSearchTest;
 	FlightPage flightPage;
 	 Date date;
-//	private FlightSearchPage flight;
 	
 	@BeforeClass
 	public void beforeClassMethod()
