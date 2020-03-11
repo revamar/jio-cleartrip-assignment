@@ -3,7 +3,6 @@
 <suite name="assignment2">
   <test thread-count="5" name="cleartrip">
     <classes>
-      <class name="com.assignment.cleartrip.webapp.test.base.AppTest"/>
       <class name="com.assignment.cleartrip.webapp.test.base.BrowserTest"/>
       <class name="com.assignment.cleartrip.webapp.test.search.flight.FlightSearchTest"/>
     </classes>

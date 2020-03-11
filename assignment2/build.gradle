@@ -22,9 +22,10 @@ repositories {
 
 dependencies {
 
-    // Use TestNG framework, also requires calling test.useTestNG() below
-    implementation 'org.testng:testng:7.1.0'
-    
+
+    // https://mvnrepository.com/artifact/org.testng/testng
+	testCompile group: 'org.testng', name: 'testng', version: '7.1.0'
+	
     // https://mvnrepository.com/artifact/io.github.bonigarcia/webdrivermanager
 	compile group: 'io.github.bonigarcia', name: 'webdrivermanager', version: '3.8.0'
 	

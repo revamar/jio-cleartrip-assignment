@@ -35,14 +35,11 @@ public class FlightSearchTest extends BrowserTest {
 			 .enterSourceAirportName()
 			 .enterDestinationAirportName()
 			 .clickDepartureDateInputBox()
-			 .selectDateForDeparture("10/April/2020")
+			 .selectDateForDeparture("20/June/2020")
 			 .clickReturnDateInputBox()
-			 .selectDateForReturn("10/April/2020")
+			 .selectDateForReturn("20/June/2020")
 			 .selectAduldPassenger()
-			 .clickFlightSearchButton()
-			 .verifyTheFlightsPageIsVisible()
-			 .clickBookButton();
-		Thread.sleep(10000);
+			 .clickFlightSearchButton();
 		
 	}
 

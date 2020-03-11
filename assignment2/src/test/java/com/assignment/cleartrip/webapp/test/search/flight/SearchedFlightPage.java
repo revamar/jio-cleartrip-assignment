@@ -44,7 +44,7 @@ public class SearchedFlightPage {
 	@FindBy(how=How.XPATH, using="//*[@id='ResultContainer_1_1']/section[2]/section/aside[1]/div/div[1]/form/div/div[9]/div/div/a[2]")
 	WebElement LAYOVERSLIDERCIRCLE2;
 	
-	@FindBy(how=How.XPATH, using="//*[@id='flightForm']/section[2]/div[3]/div[3]/button")
+	@FindBy(how=How.XPATH, using="//button[@type='button']")
 	WebElement SUITABLEFLIGHTBOOKBUTTON;
 	
 	@FindBy(how=How.XPATH, using="//*[@id='BackToRtSpT']/a/strong[2]")
@@ -53,7 +53,6 @@ public class SearchedFlightPage {
 	public SearchedFlightPage(WebDriver driver)
 	{
 		 this.driver=driver;
-	 
 	}
 	
 	public SearchedFlightPage verifyTheFlightsPageIsVisible()
@@ -65,7 +64,7 @@ public class SearchedFlightPage {
 				}
 				else {
 					wait=new WebDriverWait(driver, 90);
-					wait.pollingEvery(Duration.ofMillis(1)).until(ExpectedConditions.elementToBeClickable(SUITABLEFLIGHTBOOKBUTTON));
+					wait.pollingEvery(Duration.ofMillis(1)).until(ExpectedConditions.invisibilityOf(SUITABLEFLIGHTBOOKBUTTON));
 					return PageFactory.initElements(driver, SearchedFlightPage.class);
 				}
 					

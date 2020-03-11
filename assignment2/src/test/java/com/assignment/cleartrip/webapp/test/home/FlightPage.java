@@ -148,10 +148,11 @@ public class FlightPage{
 		return PageFactory.initElements(driver, FlightPage.class);
 	}
 	
-	public SearchedFlightPage clickFlightSearchButton()
+	public SearchedFlightPage clickFlightSearchButton() throws InterruptedException
 	{
 		Reporter.log("clickFlightSearchButton()");
 		SEARCHFLIGHTBUTTON.click();
+		Thread.sleep(10000);
 		return PageFactory.initElements(driver, SearchedFlightPage.class);
 	}
 	
