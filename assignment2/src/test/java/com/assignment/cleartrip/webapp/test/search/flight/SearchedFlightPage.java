@@ -25,6 +25,11 @@ public class SearchedFlightPage {
 	WebDriverWait wait;
 	Actions act;
 	
+	@FindBy(how=How.XPATH, using="//*[@id='GlobalNav']/div/div[1]/a/span")
+	WebElement CLEARTRIPLOGOELEMENT;
+	
+	@FindBy(how=How.XPATH, using="//*[@id='Result']/div[1]/section[2]/section/div/div[2]/div/div/div/div/div")
+	WebElement LOADERSTRIPBARELEMENT;
 	
 	@FindBy(how=How.ID, using="flightForm")
 	WebElement FLIGHTFORMPAGEELEMENT;
@@ -55,20 +60,24 @@ public class SearchedFlightPage {
 		 this.driver=driver;
 	}
 	
-	public SearchedFlightPage verifyTheFlightsPageIsVisible()
+	public SearchedFlightPage LoggingFlightLoadTime()
 	{
 				Reporter.log("verifyTheFlightsPageIsVisible()");
-				if(SUITABLEFLIGHTBOOKBUTTON.isDisplayed()==true)
-				{
-					return PageFactory.initElements(driver, SearchedFlightPage.class);
-				}
-				else {
-					wait=new WebDriverWait(driver, 90);
-					wait.pollingEvery(Duration.ofMillis(1)).until(ExpectedConditions.invisibilityOf(SUITABLEFLIGHTBOOKBUTTON));
-					return PageFactory.initElements(driver, SearchedFlightPage.class);
-				}
-					
-		}
+				long start_time=System.currentTimeMillis();
+				long endtime;
+				new WebDriverWait(driver, 120, 1).until(ExpectedConditions.invisibilityOf(LOADERSTRIPBARELEMENT));
+				endtime=System.currentTimeMillis();
+				long total=endtime-start_time;
+				Reporter.log("Total Time taken to Load::" + total);
+				Assert.assertTrue(CLEARTRIPLOGOELEMENT.getText().contains("Home"));
+				return PageFactory.initElements(driver, SearchedFlightPage.class);
+	}
+	
+	public SearchedFlightPage loggingFlightLoadTime()
+	{
+//		long start_time=System.currentTimeMillis();
+		return PageFactory.initElements(driver, SearchedFlightPage.class);
+	}
 		
 		public SearchedFlightPage chooseMultiStopOptionInJorney()
 		{

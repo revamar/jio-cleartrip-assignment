@@ -1,12 +1,9 @@
 package com.assignment.cleartrip.webapp.test.home;
 
-import java.util.Date;
 import java.util.List;
-
-import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.FindAll;
+import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.FindBys;
 import org.openqa.selenium.support.How;
@@ -15,17 +12,15 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Reporter;
-import org.testng.util.TimeUtils;
-
 import com.assignment.cleartrip.webapp.test.search.flight.SearchedFlightPage;
 
 
 public class FlightPage{
 	WebDriver driver;
 	WebDriverWait wait;
+	Actions act;
 	
 	public FlightPage(WebDriver driver) {
-//		Reporter.log("FlightPage(WebDriver driver)");
 		this.driver=driver;
 		wait=new WebDriverWait(driver, 90);
 	}
@@ -57,6 +52,9 @@ public class FlightPage{
 	
 	@FindBy(how=How.XPATH, using=".//*[@id='ui-datepicker-div']/div[2]/div/a")
 	private WebElement CALENDARNEXTMONTH;
+	
+	@FindBy(how=How.XPATH, using="//*[@id='ui-datepicker-div']/div[1]/div/a")
+	private WebElement CALENDARPREVMONTH;
 	
 	@FindBy(how=How.XPATH, using="//*[@id='Adults']")
 	private WebElement ADULTPASSENGERDROPDOWN;
@@ -111,7 +109,6 @@ public class FlightPage{
 	{
 		Reporter.log("clickReturnDateInputBox()");
 		RETURNDATEINPUTBOX.click();
-		
 		return PageFactory.initElements(driver, FlightPage.class);
 	}
 	/**
@@ -163,29 +160,59 @@ public class FlightPage{
 	 * @return
 	 * @throws InterruptedException
 	 */
-	public FlightPage selectCalendarDate(String monthyear, String Selectday) throws InterruptedException
+	public FlightPage selectCalendarDate(String monthyear, String Selectday)
 	{
 		Reporter.log("selectCalendarDate(String monthyear, String Selectday)");
 		wait.until(ExpectedConditions.visibilityOfAllElements(CALENDARMONTHSELEMENTS));
 		for (int i=0; i<CALENDARMONTHSELEMENTS.size();i++)
 		{
-			System.out.println(CALENDARMONTHSELEMENTS.get(i).getText());
 			if(CALENDARMONTHSELEMENTS.get(i).getText().equals(monthyear))
-			{				
+			{	
 				for (WebElement d:CALENDARDAYSINAMONTH)
 				{	
-					System.out.println(d.getText());
 					if(d.getText().equals(Selectday))
 					{
 						d.click();
+						Reporter.log("Month Name:"+CALENDARMONTHSELEMENTS.get(i).getText()+"Day:"+d.getText());
 						return PageFactory.initElements(driver, FlightPage.class);
 					}
 				}								
-				
-			}			
-					
+			}
 		}
-		CALENDARNEXTMONTH.click();
-		return selectCalendarDate(monthyear, Selectday);
+			CALENDARNEXTMONTH.click();
+			return selectCalendarDate(monthyear, Selectday);
+	}
+	
+	public int returnMonthNumber(String monthyear)
+	{
+		switch (monthyear) {
+			case "January":
+				return 1;
+			case "February":
+				return 2;
+			case "March":
+				return 3;
+			case "April":
+				return 4;
+			case "May":
+				return 5;
+			case "June":
+				return 6;
+			case "July":
+				return 7;
+			case "August":
+				return 8;
+			case "September":
+				return 9;
+			case "October":
+				return 10;
+			case "November":
+				return 11;
+			case "December":
+				return 12;
+			default:
+				return 0;
+				
+		}
 	}
 }
