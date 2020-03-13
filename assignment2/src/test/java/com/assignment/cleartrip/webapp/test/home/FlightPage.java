@@ -149,7 +149,6 @@ public class FlightPage{
 	{
 		Reporter.log("clickFlightSearchButton()");
 		SEARCHFLIGHTBUTTON.click();
-		Thread.sleep(10000);
 		return PageFactory.initElements(driver, SearchedFlightPage.class);
 	}
 	
@@ -163,6 +162,7 @@ public class FlightPage{
 	public FlightPage selectCalendarDate(String monthyear, String Selectday)
 	{
 		Reporter.log("selectCalendarDate(String monthyear, String Selectday)");
+		
 		wait.until(ExpectedConditions.visibilityOfAllElements(CALENDARMONTHSELEMENTS));
 		for (int i=0; i<CALENDARMONTHSELEMENTS.size();i++)
 		{
@@ -173,7 +173,6 @@ public class FlightPage{
 					if(d.getText().equals(Selectday))
 					{
 						d.click();
-						Reporter.log("Month Name:"+CALENDARMONTHSELEMENTS.get(i).getText()+"Day:"+d.getText());
 						return PageFactory.initElements(driver, FlightPage.class);
 					}
 				}								
