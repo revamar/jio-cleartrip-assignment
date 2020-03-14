@@ -32,12 +32,11 @@ public class FlightSearchTest extends BrowserTest {
 			 .enterDestinationAirportName()
 			 .clickDepartureDateInputBox()
 			 .selectDateForDeparture("20/June/2020")
-			 .clickReturnDateInputBox()
-			 .selectDateForReturn("20/June/2020")
+//			 .clickReturnDateInputBox()
+//			 .selectDateForReturn("20/June/2020")
 			 .selectAduldPassenger()
 			 .clickFlightSearchButton()
 			 .LoggingFlightLoadTime();
-		
 	}
 
 }

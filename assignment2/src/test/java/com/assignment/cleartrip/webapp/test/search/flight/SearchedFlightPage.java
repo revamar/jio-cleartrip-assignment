@@ -28,8 +28,14 @@ public class SearchedFlightPage {
 	@FindBy(how=How.XPATH, using="//*[@id='GlobalNav']/div/div[1]/a/span")
 	WebElement CLEARTRIPLOGOELEMENT;
 	
+	@FindBy(how=How.XPATH, using="/html/body/section[3]/div[2]/section[2]/section/div/div[2]/div")
+	WebElement STRIPLOADERCONTAINERELEMENT;
+	
 	@FindBy(how=How.XPATH, using="//*[@id='Result']/div[1]/section[2]/section/div/div[2]/div/div/div/div/div")
 	WebElement LOADERSTRIPBARELEMENT;
+	
+	@FindBy(how=How.XPATH, using="/html/body/section[3]/div[1]/section[2]/section/div/div[2]/div/p")
+	WebElement LOOKINGFORFLIGHTELEMENTTEXT;
 	
 	@FindBy(how=How.ID, using="flightForm")
 	WebElement FLIGHTFORMPAGEELEMENT;
@@ -55,6 +61,11 @@ public class SearchedFlightPage {
 	@FindBy(how=How.XPATH, using="//*[@id='BackToRtSpT']/a/strong[2]")
 	WebElement ALLAIRLINESHEADERELEMENT;
 	
+	@FindBy(how=How.ID, using="Result")
+	WebElement RESULTPAGEPARENTELEMENT;
+	
+	@FindBy(how=How.XPATH, using="//*[@id=\"ResultContainer_1_1\"]/section[2]/section/div/div[1]")
+	WebElement FLIGHTSDETAILPAGEELEMENT;
 	public SearchedFlightPage(WebDriver driver)
 	{
 		 this.driver=driver;
@@ -62,21 +73,22 @@ public class SearchedFlightPage {
 	
 	public SearchedFlightPage LoggingFlightLoadTime()
 	{
-				Reporter.log("verifyTheFlightsPageIsVisible()");
-				long start_time=System.currentTimeMillis();
+				long start_time;
 				long endtime;
-				new WebDriverWait(driver, 120, 1).until(ExpectedConditions.invisibilityOf(LOADERSTRIPBARELEMENT));
+				wait=new WebDriverWait(driver, 60, 1);
+				wait.until(ExpectedConditions.visibilityOf(STRIPLOADERCONTAINERELEMENT));
+				start_time=System.currentTimeMillis();
+//				wait.until(ExpectedConditions.invisibilityOfElementWithText(By.
+//						xpath("/html/body/section[3]/div[1]/section[2]/section/div/div[2]/div/p"), "Looking for flights..."));
+				wait.until(ExpectedConditions.invisibilityOfElementWithText(By.
+						xpath("/html/body/section[3]/div[1]/section[2]/section/div/div[2]/div/p"), "Your search results are ready."));
 				endtime=System.currentTimeMillis();
 				long total=endtime-start_time;
-				Reporter.log("Total Time taken to Load::" + total);
-				Assert.assertTrue(CLEARTRIPLOGOELEMENT.getText().contains("Home"));
+				Reporter.log("Start Time: "+start_time);
+				Reporter.log("End Time: "+endtime);
+				Reporter.log("Total Time taken to Load::" + total+"milli-seconds");
+				Reporter.log("verifyTheFlightsPageIsVisible()");
 				return PageFactory.initElements(driver, SearchedFlightPage.class);
-	}
-	
-	public SearchedFlightPage loggingFlightLoadTime()
-	{
-//		long start_time=System.currentTimeMillis();
-		return PageFactory.initElements(driver, SearchedFlightPage.class);
 	}
 		
 		public SearchedFlightPage chooseMultiStopOptionInJorney()

@@ -17,7 +17,9 @@ public class FirefoxConfig {
 		FirefoxOptions options=new FirefoxOptions();
 		options.setCapability(CapabilityType.ACCEPT_SSL_CERTS, true);
 		options.addPreference("dom.webnotifications.enabled", false);
-		options.addArguments("start-maximized");
+		options.setAcceptInsecureCerts(true);
+		options.setCapability("marionette", true);
+//		options.setBinary("C:\\Users\\amaryadav\\AppData\\Local\\Mozilla Firefox\\firefox.exe");
 		return options;
 		
 	}

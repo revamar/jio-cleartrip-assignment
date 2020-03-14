@@ -36,7 +36,7 @@ public class BrowserTest {
 			
 		case "firefox":
 			FirefoxConfig ff=new FirefoxConfig();
-			driver=new FirefoxDriver();
+			driver=new FirefoxDriver(ff.setOptionsForFirefox());
 			break;
 
 		default:

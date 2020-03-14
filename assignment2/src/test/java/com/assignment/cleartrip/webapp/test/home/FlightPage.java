@@ -172,6 +172,7 @@ public class FlightPage{
 				{	
 					if(d.getText().equals(Selectday))
 					{
+						Reporter.log("Selected date"+Selectday+"/"+monthyear);
 						d.click();
 						return PageFactory.initElements(driver, FlightPage.class);
 					}
